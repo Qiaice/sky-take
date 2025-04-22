@@ -4,9 +4,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class SkeTakeApplication {
+public class SkyTakeApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(SkeTakeApplication.class, args);
+        SpringApplication.run(SkyTakeApplication.class, args);
     }
 }
