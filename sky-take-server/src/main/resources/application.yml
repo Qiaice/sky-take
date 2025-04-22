@@ -1,0 +1,43 @@
+# 服务器相关配置
+server:
+  servlet:
+    context-path: / # 为了便于开发此处省略应用程序上下文
+  port: 8080 # 为了便于开发此处使用 http 默认端口
+
+# spring 相关配置
+spring:
+  application:
+    name: sky-take
+  datasource: # 数据库链接配置
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://47.108.130.188:3306/sky_take_out?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8&rewriteBatchedStatements=true
+    username: root
+    password: 040905
+    type: com.zaxxer.hikari.HikariDataSource
+
+# mybatis-plus 相关配置
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl # 将 mybatis 日志输出到控制台
+    map-underscore-to-camel-case: true # 开启驼峰命名转换，需要类中字段名和表中列名相对应    cId => c_id
+    cache-enabled: false # 是否开启二级缓存
+    # 使用 mybatis-plus 的枚举处理器
+    default-enum-type-handler: com.baomidou.mybatisplus.core.handlers.MybatisEnumTypeHandler
+  type-aliases-package: org.qiaice.entity # 扫描指定包中的类，以避免写全类名
+  mapper-locations: classpath:/mapper/**/*.xml # 扫描 mapper 文件
+  global-config:
+    db-config:
+      id-type: assign_id # 设置主键增长策列
+      update-strategy: not_null # 仅更新非空字段
+      # 逻辑删除，对 sql 效率有影响，请斟酌使用
+      # logic-delete-field: deleted # 逻辑删除字段名(实体类字段名)
+      # logic-delete-value: 1 # 逻辑已删除值(默认为 1)
+      # logic-not-delete-value: 0 # 逻辑未删除值(默认为 0)
+
+# token 相关配置
+token:
+  # 密钥，长度至少 32 位，该密钥长度为 512 位
+  key: NM9bbeueDOsnPHbRMwM6kSgOGfhIcCeBcjgCn$%PlRwa^f0_!U00I1B$9Vckj3gXscd1J%XyTUpY5035iH^^aY@0VdF#vtfolE@gw7xTZawGdO^N&ef^vHxNRTZiHXX%C#AdCV0r!heZzzHGdVmUAzYEm7UsiK9C7WIE7fHwnS^2K#4KRNew1&XWN6VSwubh2PzRIdaH*H4ibB!&eY1HwGpWDsncN*2wE4OaTz9T7a1U&TgBlkOfXNks1Pg&LiU6DaxLJzoZ_2xza!*!e%LuB6cd@mE6D#sMk*dGiOk0E#71UZ58wYUuDNtsRdjLOpuV^Dzw#1r#IOX71E5UFmd7f^b*3zcOE7m3RAdSwk@y3WFwNtesoriFz^H04pwK^rj6Tn@uNjtJ%f*Wle%xS@Ot!1iUaZM45su8omaxDS8E0wRpilVj#WXa^W2VD6lJEW4Zv9aWE*RwrsEMr5z1ctht6BPF$8_#FW3pWNve$JUdSDZ_v52%5Zdc6JUf!Gg98SHZ
+  iss: tsubaki # 签发者
+  sub: auth # 主题
+  exp: 1h # 有效时长，支持单位(ms, s, m, h, d)，区分大小写，默认 ms，单位不匹配默认 ms
